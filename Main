@@ -1,0 +1,55 @@
+''' Validate input for menu '''
+def validate(check):
+    if check != 1 and check != 2 and check != 3:
+        print("Invalid input")
+        return False
+    else:
+        return True
+
+''' Display menu options '''
+print("Correct: 1")
+print("Higher: 2")
+print("Lower: 3")
+
+''' Define variables that will be used '''
+nums = range(1,101)
+search = []
+startIn = 0
+endIn = 99
+middleIn = 50
+win = False
+total = 1
+
+''' Run main process until correct guess is made'''
+while win == False:
+    ''' Set the guess to the middle of the search array '''
+    guess = middleIn
+    
+    ''' Display current guess '''
+    print()
+    print("I guess " + str(guess))
+        
+    ''' Recieve and validate menu input '''
+    safe = False
+    while safe == False:
+        direct = int(input("Correct?: "))
+        safe = validate(direct)
+    
+    ''' Display answer and number of guesses if correct '''
+    ''' Set search array to top half if guess was too low '''
+    ''' Set search array to bottom half if guess was too high'''
+    if direct == 1:
+        print()
+        print("Your number was " + str(guess))
+        print("It took me " + str(total) + " guesses")
+        win = True
+    elif direct == 2:
+        startIn = middleIn
+        search = nums[startIn:endIn]
+        middleIn = startIn + (int((endIn - startIn)/2))
+        total += 1
+    elif direct == 3:
+        endIn = middleIn
+        search = nums[startIn:endIn]
+        middleIn = startIn + (int((endIn - startIn)/2))
+        total += 1
